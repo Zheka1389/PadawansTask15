@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+
 
 namespace PadawansTask15
 {
@@ -18,8 +18,15 @@ namespace PadawansTask15
         /// </example>
         public IEnumerable<string> GetUppercaseStrings(IEnumerable<string> data)
         {
-            // TODO : Implement GetUppercaseStrings
-            throw new NotImplementedException();
+
+            foreach (var item in data)
+            {
+                if (item == null || item == "" || item == item.ToUpper())
+                    yield return item;
+                else
+                    yield return item.ToUpper();
+            }
+
         }
 
         /// <summary> Transforms an each string from sequence to its length.</summary>
@@ -34,8 +41,13 @@ namespace PadawansTask15
         /// </example>
         public IEnumerable<int> GetStringsLength(IEnumerable<string> data)
         {
-            // TODO : Implement GetStringsLength
-            throw new NotImplementedException();
+            foreach (var item in data)
+            {
+                if (item == null || item == "")
+                    yield return 0;
+                else
+                    yield return item.Length;
+            }
         }
 
         /// <summary>Transforms integer sequence to its square sequence, f(x) = x * x. </summary>
@@ -50,8 +62,10 @@ namespace PadawansTask15
         /// </example>
         public IEnumerable<long> GetSquareSequence(IEnumerable<int> data)
         {
-            // TODO : Implement GetSquareSequence
-            throw new NotImplementedException();
+            foreach (var item in data)
+            {
+                yield return item * (long)item;
+            }
         }
 
         /// <summary> Filters a string sequence by a prefix value (case insensitive).</summary>
@@ -71,8 +85,23 @@ namespace PadawansTask15
         /// </example>
         public IEnumerable<string> GetPrefixItems(IEnumerable<string> data, string prefix)
         {
-            // TODO : Implement GetPrefixItems
-            throw new NotImplementedException();
+            if (prefix == null)
+                throw new ArgumentNullException();
+            List<string> result = new List<string>();
+            foreach (var item in data)
+            {
+                if (item == null)
+                    continue;
+                string[] ch = item.Split(' ');
+                foreach (var itemMas in ch)
+                {
+                    if (itemMas.Contains(prefix))
+                    {
+                        result.Add(itemMas);
+                    }
+                }
+            }
+            return result.ToArray();
         }
 
         /// <summary> Finds the 3 largest numbers from a sequence.</summary>
@@ -89,8 +118,21 @@ namespace PadawansTask15
         /// </example>
         public IEnumerable<int> Get3LargestItems(IEnumerable<int> data)
         {
-            // TODO : Implement Get3LargestItems
-            throw new NotImplementedException();
+            if (data == null)
+                return data;
+            List<int> r = new List<int>();
+            foreach (var item in data)
+            {
+                r.Add(item);
+            }
+            r.Sort();
+            r.Reverse();
+            if(r.Count == 1)
+                return new[] { r[0] };
+            else if(r.Count == 2)
+                return new[] { r[0], r[1] };
+            else
+                return new[] { r[0], r[1], r[2] };
         }
 
         /// <summary> Calculates sum of all integers from object array.</summary>
@@ -106,8 +148,15 @@ namespace PadawansTask15
         /// </example>
         public int GetSumOfAllIntegers(object[] data)
         {
-            // TODO : Implement GetSumOfAllIntegers
-            throw new NotImplementedException();
+            int i = 0;
+            foreach (var item in data)
+            {
+                if(item.GetType() == i.GetType())
+                {
+                    i += (int)item;
+                }
+            }
+            return i;
         }
     }
 }
