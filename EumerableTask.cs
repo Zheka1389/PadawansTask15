@@ -95,7 +95,7 @@ namespace PadawansTask15
                 string[] ch = item.Split(' ');
                 foreach (var itemMas in ch)
                 {
-                    if (itemMas.Contains(prefix))
+                    if (itemMas.ToUpper().StartsWith(prefix.ToUpper()))
                     {
                         result.Add(itemMas);
                     }
@@ -127,11 +127,13 @@ namespace PadawansTask15
             }
             r.Sort();
             r.Reverse();
-            if(r.Count == 1)
+            if (r.Count == 0)
+                return data;
+            else if(r.Count == 1)
                 return new[] { r[0] };
             else if(r.Count == 2)
                 return new[] { r[0], r[1] };
-            else
+            else 
                 return new[] { r[0], r[1], r[2] };
         }
 
@@ -151,7 +153,9 @@ namespace PadawansTask15
             int i = 0;
             foreach (var item in data)
             {
-                if(item.GetType() == i.GetType())
+                if (item == null)
+                    continue;
+                if (item.GetType() == i.GetType())
                 {
                     i += (int)item;
                 }
